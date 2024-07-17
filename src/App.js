@@ -1,24 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter,Routes,Route, useNavigate} from 'react-router-dom'
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import CreatePost from './pages/CreatePost';
+import Navbar from './pages/Navbar';
+import { useCookies } from 'react-cookie';
+import { useEffect } from 'react';
 
 function App() {
+
+  const PrivateRouter = ({element}) =>{
+    const [cookie,setCookie]= useCookies(["access_token"])
+    const nav = useNavigate()
+    useEffect(()=>{
+      if(!cookie.access_token){
+        nav('/login')
+      }
+    },[])
+    return element
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+    <Navbar/>
+    <Routes>
+      <Route path='/' element={<PrivateRouter element={<Home/>}/>} />
+      <Route path='/createpost' element={<PrivateRouter element={<CreatePost/>}/>} />
+      <Route path='/login' element={<Login/>} />
+      <Route path='/register' element={<Register/>} />
+    </Routes>
+    </BrowserRouter>
+    </>
   );
 }
 
