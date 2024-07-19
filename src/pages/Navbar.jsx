@@ -29,11 +29,18 @@ const Navbar = () => {
             {cookie.access_token
              ?
             <>
+            <li>
             <Link to='/'>
             <img src={image} height={50} width={50} alt={name} />
             <span>{name} </span>
             </Link>
+            </li>
+            <li>
             <button onClick={handleLogout}>Logout</button>
+            </li>
+            {/* <li>
+              <button onClick={() => nav('/yourposts')}>Your Posts</button>
+            </li> */}
             </>
             :
             <>

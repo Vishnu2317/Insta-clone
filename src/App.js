@@ -7,6 +7,7 @@ import CreatePost from './pages/CreatePost';
 import Navbar from './pages/Navbar';
 import { useCookies } from 'react-cookie';
 import { useEffect } from 'react';
+import YourPosts from './pages/YourPosts';
 
 function App() {
 
@@ -28,9 +29,11 @@ function App() {
     <Routes>
       <Route path='/' element={<PrivateRouter element={<Home/>}/>} />
       <Route path='/createpost' element={<PrivateRouter element={<CreatePost/>}/>} />
+      <Route path='/yourposts' element={<PrivateRouter element={<YourPosts/>}/>}/>
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
-    </Routes>
+      
+     </Routes>
     </BrowserRouter>
     </>
   );
